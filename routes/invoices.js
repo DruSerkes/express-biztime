@@ -30,7 +30,7 @@ router.get('/:id', async (req, res, next) => {
 		}
 		const invoice = results.rows[0];
 		const company = await db.query(`SELECT * FROM companies WHERE code = $1`, [ invoice.comp_code ]);
-		invoice.company = company.rows;
+		invoice.company = company.rows[0];
 
 		return res.json({ invoice });
 	} catch (e) {
